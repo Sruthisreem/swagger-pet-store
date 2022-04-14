@@ -52,7 +52,7 @@ const Details = () => {
         let paramTableContent: TableContentType[] = []
 
         selectedItem.parameters.map((itemData: any) => {
-            paramTableContent.push({
+          return paramTableContent.push({
                 name: itemData.name,
                 description: itemData.description,
                 required: itemData.required ? 'true' : 'false'
@@ -62,6 +62,7 @@ const Details = () => {
             if (typeof selectedItem.responses[el] === 'object' && selectedItem.responses[el] !== null) {
                 return [...res, { code: el, description: (selectedItem.responses[el]).description }];
             }
+            return res
         }, []);
         setParamContent(paramTableContent)
         setParamHeader(['Name', "Description", "Required"])
@@ -98,8 +99,8 @@ const Details = () => {
                 <div className="flex flex-row items-center">
                     <div className='text-2xl text-pink-600 font-bold'> Operations </div>
                     <div className='flex ml-3  content-start flex-wrap flex-row'>
-                        {operations.map((item) =>
-                            <button className={`${item === operations[0]? 'bg-teal-500' : '' } w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`} onClick={(e) => renderOperationDetails(e, item)}>
+                        {operations.map((item, index) =>
+                            <button key={index} className={`${item === operations[0]? 'bg-teal-500' : '' } w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`} onClick={(e) => renderOperationDetails(e, item)}>
                                 {item}
                             </button>
                         )}
