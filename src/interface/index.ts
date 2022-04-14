@@ -31,7 +31,7 @@ export interface Tag {
     name: string,
     description: string
 }
-type ActionTypes = 'UPDATE_DATA';
+type ActionTypes = 'INITIAL_DATA' ;
 export interface Action {
     type: ActionTypes;
     payload?: any;
@@ -43,8 +43,3 @@ export type ContextHook = () => {
     dispatch: (action: Action) => void;
 }
 
-export const getFilteredData= (data: SwaggerData) =>{
-    console.log('getFilteredData',data)
-    
-    return data
-}

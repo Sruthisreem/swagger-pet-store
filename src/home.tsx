@@ -15,7 +15,7 @@ const Home: FC<HomeProps> = () => {
         fetch("https://petstore.swagger.io/v2/swagger.json")
             .then(response => response.json())
             .then(data => dispatch({
-                type: "UPDATE_DATA",
+                type: "INITIAL_DATA",
                 payload: data,
             }));
     }, []);

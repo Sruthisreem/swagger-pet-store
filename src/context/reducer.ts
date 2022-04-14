@@ -1,12 +1,12 @@
 
-import {ReducerType, getFilteredData} from '../interface'
+import {ReducerType} from '../interface'
 const reducer: ReducerType = (state, action) => {
     switch (action.type) {
-      case "UPDATE_DATA":
-          console.log("UPDATE_DATA", action.payload)
+      case "INITIAL_DATA":
+          console.log("INITIAL_DATA", action.payload)
         return { ...state, 
             isLoading:  false,
-            swaggerData:  getFilteredData(action.payload) }
+            swaggerData: action.payload }
       default:
         return state;
     }
