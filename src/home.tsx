@@ -24,7 +24,7 @@ const Home: FC<HomeProps> = () => {
             <div className="flex flex-col px-3 py-3 h-screen text-red-300 bg-gradient-to-br from-gray-300 via-teal-700 to-gray-800 overflow-scroll">
                 <div className="flex justify-center text-2xl text-pink-600 font-bold">{state.swaggerData.info.title}</div>
                 <div>This is a sample server Petstore server. </div>
-                <div className='py-2'>
+                <div className='py-3 px-4'>
                 {state.swaggerData.tags.map((tag: any, index) => (
                     <div key={index}>
                     <CollapseListItem tag={tag} paths={state.swaggerData.paths}></CollapseListItem>

@@ -9,7 +9,7 @@ const Table: FC<TableProps> = ({ tableHeaders, tableContents }) => {
     return (
         <>
             <table className="w-full border-collapse border border-slate-400 ...">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-400">
                     <tr>
                         {tableHeaders.map((item, index) =>
                             <th key={index} className="border border-slate-300 ...">{item}</th>

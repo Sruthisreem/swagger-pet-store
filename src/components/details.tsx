@@ -18,7 +18,7 @@ const Details = () => {
     const [parameterHeader, setParamHeader] = useState<string[]>([]);
     const [responseContent, setResponseContent] = useState<any>([]);
     const [responseHeader, setResponseHeader] = useState<string[]>([]);
-    const [selectedPathDetails, setSelectedPathDetails ]= useState<any>({});
+    const [selectedPathDetails, setSelectedPathDetails] = useState<any>({});
     const [operations, setOperations] = useState<string[]>([]);
     const location = useLocation();
     const navigate = useNavigate()
@@ -30,7 +30,7 @@ const Details = () => {
         setSelectedPathDetails(formattedData)
         const operations = Object.keys(formattedData)
         setOperations(operations)
-        setSelectedOperationDetails(operations[0],formattedData)
+        setSelectedOperationDetails(operations[0], formattedData)
     }, []);
 
 
@@ -47,12 +47,12 @@ const Details = () => {
     };
 
 
-    const setSelectedOperationDetails = (selectedOperation: string,formattedData:any) => {
+    const setSelectedOperationDetails = (selectedOperation: string, formattedData: any) => {
         let selectedItem = formattedData[selectedOperation]
         let paramTableContent: TableContentType[] = []
 
         selectedItem.parameters.map((itemData: any) => {
-          return paramTableContent.push({
+            return paramTableContent.push({
                 name: itemData.name,
                 description: itemData.description,
                 required: itemData.required ? 'true' : 'false'
@@ -72,10 +72,10 @@ const Details = () => {
 
     const renderOperationDetails = (e: React.MouseEvent<HTMLElement>, selectedOperation: string): void => {
         e.preventDefault();
-        setSelectedOperationDetails(selectedOperation,selectedPathDetails )
+        setSelectedOperationDetails(selectedOperation, selectedPathDetails)
     }
     return (
-        <div>
+        <div className='flex flex-col  h-screen bg-gray-100'>
             <div className="bg-teal-600">
                 <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between flex-wrap">
@@ -100,21 +100,22 @@ const Details = () => {
                     <div className='text-2xl text-pink-600 font-bold'> Operations </div>
                     <div className='flex ml-3  content-start flex-wrap flex-row'>
                         {operations.map((item, index) =>
-                            <button key={index} className={`${item === operations[0]? 'bg-teal-500' : '' } w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`} onClick={(e) => renderOperationDetails(e, item)}>
+                            <button key={index} className={`${item === operations[0] ? 'bg-teal-500' : ''} w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`} onClick={(e) => renderOperationDetails(e, item)}>
                                 {item}
                             </button>
                         )}
                     </div>
                 </div>
-
-                <div className='text-xl text-pink-600 font-bold py-6'>
-                    Parameters
+                <div className='flex flex-col border rounded-lg border-gray-400 px-3 py-3 mx-2 my-2'>
+                    <div className='text-xl text-pink-600 font-bold py-6'>
+                        Parameters
+                    </div>
+                    <Table tableHeaders={parameterHeader} tableContents={parameterContent}></Table>
+                    <div className='text-xl text-pink-600 font-bold py-6'>
+                        Response
+                    </div>
+                    <Table tableHeaders={responseHeader} tableContents={responseContent}></Table>
                 </div>
-                <Table tableHeaders={parameterHeader} tableContents={parameterContent}></Table>
-                <div className='text-xl text-pink-600 font-bold py-6'>
-                    Response
-                </div>
-                <Table tableHeaders={responseHeader} tableContents={responseContent}></Table>
             </div>
         </div>
     );
