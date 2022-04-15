@@ -13,29 +13,14 @@ interface TableContentType {
     code?: string
 }
 
+
 const Details = () => {
-    const [parameterContent, setParamContent] = useState<any>([]);
-    const [parameterHeader, setParamHeader] = useState<string[]>([]);
-    const [responseContent, setResponseContent] = useState<any>([]);
-    const [responseHeader, setResponseHeader] = useState<string[]>([]);
-    const [selectedPathDetails, setSelectedPathDetails] = useState<any>({});
-    const [operations, setOperations] = useState<string[]>([]);
     const location = useLocation();
     const navigate = useNavigate()
     const pathState = location.state as CustomizedState;
     const { state } = useGlobalContext();
-
-    useEffect(() => {
-        const formattedData = formatPathData()
-        setSelectedPathDetails(formattedData)
-        const operations = Object.keys(formattedData)
-        setOperations(operations)
-        setSelectedOperationDetails(operations[0], formattedData)
-    }, []);
-
-
-
-
+    const parameterHeader :string[] = ['Name', "Description", "Required"]
+    const responseHeader :string[] = ['Code', 'Description']
     const formatPathData = () => {
         let parentObj = state.swaggerData.paths[pathState.pathId];
         return Object.keys(parentObj || {}).reduce((acc: any, cur: any) => {
@@ -45,7 +30,16 @@ const Details = () => {
             return acc;
         }, {});
     };
-
+    const operations:string[] = Object.keys(formatPathData())
+    const [parameterContent, setParamContent] = useState<any>([]);
+    const [responseContent, setResponseContent] = useState<any>([]);
+    const selectedPathDetails = formatPathData();
+    const [operation, setCurrentOperations] = useState<string>(operations[0]);
+ 
+   
+    useEffect(() => {
+        setSelectedOperationDetails(operation, selectedPathDetails)
+    }, []);
 
     const setSelectedOperationDetails = (selectedOperation: string, formattedData: any) => {
         let selectedItem = formattedData[selectedOperation]
@@ -65,13 +59,12 @@ const Details = () => {
             return res
         }, []);
         setParamContent(paramTableContent)
-        setParamHeader(['Name', "Description", "Required"])
         setResponseContent(responseTableContent)
-        setResponseHeader(['Code', 'Description'])
     }
 
     const renderOperationDetails = (e: React.MouseEvent<HTMLElement>, selectedOperation: string): void => {
         e.preventDefault();
+        setCurrentOperations(selectedOperation)
         setSelectedOperationDetails(selectedOperation, selectedPathDetails)
     }
     return (
@@ -100,7 +93,7 @@ const Details = () => {
                     <div className='text-2xl text-pink-600 font-bold'> Operations </div>
                     <div className='flex ml-3  content-start flex-wrap flex-row'>
                         {operations.map((item, index) =>
-                            <button key={index} className={`${item === operations[0] ? 'bg-teal-500' : ''} w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`} onClick={(e) => renderOperationDetails(e, item)}>
+                            <button key={index} className={`${item === operation ? 'bg-teal-500' : ''} w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`} onClick={(e) => renderOperationDetails(e, item)}>
                                 {item}
                             </button>
                         )}
