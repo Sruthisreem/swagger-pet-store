@@ -1,22 +1,19 @@
-# cra-template-tailwindcss-typescript
+# Swagger Pet Store
 
-A streamlined [Tailwind CSS v3.x](https://tailwindcss.com) template for [Create React App](https://github.com/facebook/create-react-app) in [TypeScript](https://www.typescriptlang.org/).
+This is a sample server Petstore server. This has multiple paths grouped under same tags. This project single page application which is build with React, Hooks, Typescript and tailwind CSS
 
-> This template installs and sets up [Tailwind CSS](https://tailwindcss.com) with TypeScript support.
+## `Installation and Setup Instructions`
 
-## Usage
+- You will need node and npm installed globally on your machine.
 
-```bash
-npx create-react-app --template tailwindcss-typescript
-```
+- Clone this project repository -[https://github.com/Sruthisreem/swagger-pet-store.git](https://github.com/Sruthisreem/swagger-pet-store.git)
 
-## Credits
+  ```
+  git clone https://github.com/Sruthisreem/swagger-pet-store.git
+  ```
 
-This project was made possible thanks to the following projects.
+- `Installation`: npm install
 
-1. [GeoffSelby/cra-template-tailwindcss](https://github.com/GeoffSelby/cra-template-tailwindcss) - A streamlined Tailwind CSS template for Create React App (in JavaScript).
-2. [cra-template-typescript](https://github.com/facebook/create-react-app/tree/master/packages/cra-template-typescript) - An official TypeScript template for create-react-app.
+- `To Start Server` : npm start
 
-## License
-
-MIT © [Sung M. Kim](https://sung.codes)
+- `To Visit App` : http://localhost:3000/
