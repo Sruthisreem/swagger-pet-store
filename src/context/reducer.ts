@@ -3,7 +3,6 @@ import { ReducerType } from '../interface/interfaces'
 const reducer: ReducerType = (state, action) => {
   switch (action.type) {
     case "DATA_FETCH_SUCCESS":
-      console.log("DATA_FETCH_SUCCESS", action.payload)
       return {
         ...state,
         isLoading: false,
@@ -11,7 +10,6 @@ const reducer: ReducerType = (state, action) => {
       }
 
     case "DATA_FETCH-ERROR":
-      console.log("DATA_FETCH-ERROR", action.payload)
       return {
         ...state,
         isLoading: false,
