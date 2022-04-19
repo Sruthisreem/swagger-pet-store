@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 interface HeaderProps {
   title: string;
-  description:string;
+  description: string;
 }
 
 const Header: FC<HeaderProps> = ({ title, description }) => {

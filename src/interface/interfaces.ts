@@ -1,61 +1,63 @@
 export interface State {
-    isLoading: boolean;
-    swaggerData: SwaggerData;
-    errorMessage:string
+  isLoading: boolean;
+  swaggerData: SwaggerData;
+  errorMessage: string;
 }
 interface SwaggerData {
-    info: Info,
-    tags: Tag[],
-    paths: Path
+  info: Info;
+  tags: Tag[];
+  paths: Path;
 }
 
 interface Info {
-    title :string,
-    description: string
+  title: string;
+  description: string;
 }
-export interface Path{
-    [key: string]: EndpointMethods;
+
+export interface Path {
+  [key: string]: EndpointMethods;
 }
+
 export interface EndpointMethods {
-    [key: string]: EndpointDetails;
+  [key: string]: EndpointDetails;
 }
 export interface EndpointDetails {
-    parameters: RequestParam[],
-    responses: ResponseParam
+  parameters: RequestParam[];
+  responses: ResponseParam;
 }
 interface ResponseParam {
-    [key: string]: {
-        description: string
-    }
+  [key: string]: {
+    description: string;
+  };
 }
 interface RequestParam {
-    description: string
-    name: string
-    required: boolean
+  description: string;
+  name: string;
+  required: boolean;
 }
 export interface Tag {
-    name: string,
-    description: string
+  name: string;
+  description: string;
 }
-type ActionTypes = 'DATA_FETCH_SUCCESS'| 'DATA_FETCH-ERROR' ;
+
+type ActionTypes = "DATA_FETCH_SUCCESS" | "DATA_FETCH-ERROR";
 export interface Action {
-    type: ActionTypes;
-    payload?: any;
+  type: ActionTypes;
+  payload?: any;
 }
+
 export type ReducerType = (state: State, action: Action) => State;
 
 export type ContextHook = () => {
-    state: State,
-    dispatch: (action: Action) => void;
-}
-
+  state: State;
+  dispatch: (action: Action) => void;
+};
 export interface TableContentType {
-    description?: string,
-    name?: string,
-    required?: string,
-    code?: string
+  description?: string;
+  name?: string;
+  required?: string;
+  code?: string;
 }
-
 export interface CustomizedState {
-    pathId: string
+  pathId: string;
 }
