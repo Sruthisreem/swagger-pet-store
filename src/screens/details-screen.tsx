@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
+import { TableContentType, CustomizedState } from "../interface/interfaces"
 import Table from "../components/table-view"
-interface CustomizedState {
-    pathId: string
-}
-interface TableContentType {
-    description?: string,
-    name?: string,
-    required?: string,
-    code?: string
-}
-
 
 const Details = () => {
     const location = useLocation();
@@ -31,17 +22,23 @@ const Details = () => {
         }, {});
     };
     const operations:string[] = Object.keys(formatPathData())
-    const [parameterContent, setParamContent] = useState<any>([]);
-    const [responseContent, setResponseContent] = useState<any>([]);
+    const [parameterContent, setParamContent] = useState<TableContentType[]>([]);
+    const [responseContent, setResponseContent] = useState<TableContentType[]>([]);
     const selectedPathDetails = formatPathData();
     const [operation, setCurrentOperations] = useState<string>(operations[0]);
  
    
     useEffect(() => {
-        setSelectedOperationDetails(operation, selectedPathDetails)
+     handleInitialData()
     }, []);
-
-    const setSelectedOperationDetails = (selectedOperation: string, formattedData: any) => {
+   const handleInitialData =() =>{
+    if(selectedPathDetails && Object.keys(selectedPathDetails).length){
+        handleSelectedOperationDetails(operation, selectedPathDetails)
+    }else{
+        navigate('/')
+    }
+   }
+    const handleSelectedOperationDetails = (selectedOperation: string, formattedData: any) => {
         let selectedItem = formattedData[selectedOperation]
         let paramTableContent: TableContentType[] = []
 
@@ -65,12 +62,12 @@ const Details = () => {
     const renderOperationDetails = (e: React.MouseEvent<HTMLElement>, selectedOperation: string): void => {
         e.preventDefault();
         setCurrentOperations(selectedOperation)
-        setSelectedOperationDetails(selectedOperation, selectedPathDetails)
+        handleSelectedOperationDetails(selectedOperation, selectedPathDetails)
     }
     return (
         <div className='flex flex-col  h-screen bg-gray-100'>
             <div className="bg-teal-600">
-                <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+                <div className="mx-2 py-3 ">
                     <div className="flex items-center justify-between flex-wrap">
                         <div className="w-0 flex-1 flex items-center">
                             <span className="flex ">
@@ -82,7 +79,7 @@ const Details = () => {
                                 </div>
                             </span>
                             <p className="ml-3 font-medium text-white truncate">
-                                <span className="hidden md:inline"> {pathState.pathId}</span>
+                                <span className=" md:inline"> {pathState.pathId}</span>
                             </p>
                         </div>
                     </div>
@@ -100,7 +97,7 @@ const Details = () => {
                     </div>
                     
                 </div>
-                <div className='flex flex-col border rounded-lg border-gray-400 px-3 py-3 mx-2 my-2'>
+                <div className='flex flex-col border rounded-lg border-gray-400 px-3 py-3 my-2'>
                     <div className='text-xl text-pink-600 font-bold py-6'>
                         Parameters
                     </div>

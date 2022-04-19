@@ -1,5 +1,5 @@
 
-import { ReducerType } from '../interface'
+import { ReducerType } from '../interface/interfaces'
 const reducer: ReducerType = (state, action) => {
   switch (action.type) {
     case "DATA_FETCH_SUCCESS":

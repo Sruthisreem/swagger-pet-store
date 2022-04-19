@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+import { TableContentType } from "../interface/interfaces"
 
 interface TableProps {
     tableHeaders: string[];
-    tableContents: Array<any>;
+    tableContents: TableContentType[];
 }
 
 const Table: FC<TableProps> = ({ tableHeaders, tableContents }) => {
@@ -19,8 +20,8 @@ const Table: FC<TableProps> = ({ tableHeaders, tableContents }) => {
                 <tbody className='divide-y divide-gray-300'>
                     {tableContents.map((item, index) => {
                         return <tr key={index}>{
-                         Object.keys(item).map((key, itemIndex) =>{
-                            return <td key={itemIndex} className="px-3 border border-slate-300 ...">{item[key]}</td>})
+                         Object.keys(item).map((key:string, itemIndex) =>{
+                            return <td key={itemIndex} className="px-3 border border-slate-300 ...">{item[key as keyof TableContentType]}</td>})
                         }
                         </tr>
                     })}

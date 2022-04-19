@@ -1,7 +1,8 @@
 import React, { FC, useEffect } from 'react';
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 import CollapseItem from "../components/collapse-view";
-
+import ReactMarkdown from 'react-markdown'
+import {Tag} from '../interface/interfaces'
 interface HomeProps {
 
 }
@@ -11,8 +12,11 @@ const Home: FC<HomeProps> = () => {
     const { state, dispatch } = useGlobalContext();
 
     useEffect(() => {
-        const fetchData = async () => {
-            await fetch('https://petstore.swagger.io/v2/swagger.json')
+        fetchData()
+    }, []);
+
+    const fetchData = () =>{
+        fetch('https://petstore.swagger.io/v2/swagger.json')
             .then((response) =>{
                 if (response.ok) {
                     return response.json();
@@ -28,27 +32,8 @@ const Home: FC<HomeProps> = () => {
                     payload: "Failed to get data. Please try again !!!",
                 })
               });
-            }
-              fetchData();
-    }, []);
-
-
-    function  urlify(text:string) {
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        console.log("split",text.split(urlRegex))
-        return text.split(urlRegex)
-          .map(part => {
-            if (part.match(urlRegex)) {
-              return <a href={part} key={part}> {part} </a>;
-            }
-            return part;
-          });
-      }
-    
-      const headingAvailable = (
-        <span className="home_post_text">{urlify(state.swaggerData.info.description)}</span>
-      );
-      console.log("headingAvailable",headingAvailable)
+    }
+   
     return (
         <>
             <div className="flex flex-col h-screen bg-slate-300 overflow-scroll">
@@ -60,9 +45,10 @@ const Home: FC<HomeProps> = () => {
                 </div>
                 <div className='py-3 px-4'>
                     <div>
-                    <div>{headingAvailable}</div>
+                    <div className='py-4'>                    <ReactMarkdown children={state.swaggerData.info.description} />
+</div>
                     </div>
-                    {state.swaggerData.tags.map((tag: any, index) => (
+                    {state.swaggerData.tags.map((tag: Tag, index) => (
                         <div key={index}>
                             <CollapseItem tag={tag} paths={state.swaggerData.paths}></CollapseItem>
                         </div>

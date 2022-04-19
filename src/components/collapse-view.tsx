@@ -2,7 +2,7 @@
 
 
 import React, { FC } from 'react';
-import { Tag, Path } from "../interface"
+import { Tag, Path } from "../interface/interfaces"
 import { useNavigate } from "react-router-dom";
 interface CollapseListItemProps {
     tag: Tag;

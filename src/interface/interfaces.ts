@@ -4,9 +4,14 @@ export interface State {
     errorMessage:string
 }
 interface SwaggerData {
-    info: any,
+    info: Info,
     tags: Tag[],
     paths: Path
+}
+
+interface Info {
+    title :string,
+    description: string
 }
 export interface Path{
     [key: string]: EndpointMethods;
@@ -44,3 +49,13 @@ export type ContextHook = () => {
     dispatch: (action: Action) => void;
 }
 
+export interface TableContentType {
+    description?: string,
+    name?: string,
+    required?: string,
+    code?: string
+}
+
+export interface CustomizedState {
+    pathId: string
+}

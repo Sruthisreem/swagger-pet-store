@@ -6,12 +6,13 @@ import {
     useReducer,
 } from "react";
 import reducer from "./reducer";
-import { State, Action, ContextHook } from "../interface"
+import { State, Action, ContextHook } from "../interface/interfaces"
 // Initial State
 const initialState: State = {
     isLoading: true,
     swaggerData: {
         "info": {
+            "title":"swagger",
             "description": "This is a sample server Petstore server. "
         },
         tags: [
