@@ -1,8 +1,9 @@
 import React, { FC, useEffect } from "react";
 import { useGlobalContext } from "../context/context";
 import CollapseItem from "../components/collapse-view";
-import ReactMarkdown from "react-markdown";
+import InfoSection from "../components/info-section";
 import { Tag } from "../interface/interfaces";
+
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
@@ -56,13 +57,8 @@ const Home: FC<HomeProps> = () => {
               </div>
             </div>
             <div className="py-3 px-4">
-              <div>
-                <div className="py-4">
-                  {" "}
-                  <ReactMarkdown
-                    children={state.swaggerData.info.description}
-                  />
-                </div>
+              <div className="py-4">
+                <InfoSection info={state.swaggerData.info} />
               </div>
               {state.swaggerData.tags.map((tag: Tag, index) => (
                 <div key={index}>

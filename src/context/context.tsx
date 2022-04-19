@@ -14,6 +14,11 @@ const initialState: State = {
     info: {
       title: "swagger",
       description: "This is a sample server Petstore server. ",
+      version: "1.0.4",
+      contact: {
+        email: "apiteam@swagger.io",
+      },
+      termsOfService: "http://swagger.io/terms/",
     },
     tags: [],
     paths: {},

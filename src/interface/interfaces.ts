@@ -10,11 +10,17 @@ interface SwaggerData {
   paths: Path;
 }
 
-interface Info {
+export interface Info {
   title: string;
   description: string;
+  termsOfService: string;
+  version: string;
+  contact: Contact;
 }
 
+interface Contact {
+  email: string;
+}
 export interface Path {
   [key: string]: EndpointMethods;
 }
