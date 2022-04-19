@@ -9,7 +9,7 @@ interface CollapseListItemProps {
     paths: Path;
 }
 
-const CollapseListItem: FC<CollapseListItemProps> = ({ tag, paths }) => {
+const CollapseItem: FC<CollapseListItemProps> = ({ tag, paths }) => {
     const navigate = useNavigate()
     return (
         <>
@@ -27,10 +27,10 @@ const CollapseListItem: FC<CollapseListItemProps> = ({ tag, paths }) => {
                         return ((tagfrom === tag.name) ? <div className="flex py-2" key={key}>
                             <div className="flex w-full flex-row  items-center justify-between rounded-lg bg-white p-6 shadow-lg">
                                 <h5 className="text-xl font-medium leading-tight text-gray-900">{key}</h5>
-                                <button type="button" className="rounded bg-blue-600 px-2 py-2 font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                                <button type="button" className="rounded bg-teal-600 px-2 py-2 font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-teal-600 hover:shadow-lg focus:bg-teal-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-teal-600 active:shadow-lg"
                                     onClick={() => {
                                         const param = key.replace("{","").replace("}","") 
-                                        navigate(`details${param}`, {
+                                        navigate(`/details${param}`, {
                                         state: { pathId: key },
                                       }); }}>View Details</button>
                             </div>
@@ -43,4 +43,4 @@ const CollapseListItem: FC<CollapseListItemProps> = ({ tag, paths }) => {
     );
 };
 
-export default CollapseListItem;
+export default CollapseItem;

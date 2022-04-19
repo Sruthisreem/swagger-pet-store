@@ -98,6 +98,7 @@ const Details = () => {
                             </button>
                         )}
                     </div>
+                    
                 </div>
                 <div className='flex flex-col border rounded-lg border-gray-400 px-3 py-3 mx-2 my-2'>
                     <div className='text-xl text-pink-600 font-bold py-6'>

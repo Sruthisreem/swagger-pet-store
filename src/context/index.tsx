@@ -19,7 +19,8 @@ const initialState: State = {
         ],
         paths: {
         }
-    }
+    },
+    errorMessage: ''
 }
 // Create Our context
 const globalContext = createContext<{

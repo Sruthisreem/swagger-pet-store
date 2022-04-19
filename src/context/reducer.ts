@@ -1,15 +1,25 @@
 
-import {ReducerType} from '../interface'
+import { ReducerType } from '../interface'
 const reducer: ReducerType = (state, action) => {
-    switch (action.type) {
-      case "INITIAL_DATA":
-          console.log("INITIAL_DATA", action.payload)
-        return { ...state, 
-            isLoading:  false,
-            swaggerData: action.payload }
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case "DATA_FETCH_SUCCESS":
+      console.log("DATA_FETCH_SUCCESS", action.payload)
+      return {
+        ...state,
+        isLoading: false,
+        swaggerData: action.payload
+      }
+
+    case "DATA_FETCH-ERROR":
+      console.log("DATA_FETCH-ERROR", action.payload)
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload
+      }
+    default:
+      return state;
   }
-  
-  export default reducer;
+}
+
+export default reducer;

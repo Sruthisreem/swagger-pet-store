@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./home"
-import Details from "./components/details"
+import Home from "./screens/home-screen"
+import Details from "./screens/details-screen"
 import { GlobalContextProvider } from "./context";
 
 function App() {

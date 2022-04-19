@@ -1,6 +1,7 @@
 export interface State {
     isLoading: boolean;
     swaggerData: SwaggerData;
+    errorMessage:string
 }
 interface SwaggerData {
     info: any,
@@ -31,7 +32,7 @@ export interface Tag {
     name: string,
     description: string
 }
-type ActionTypes = 'INITIAL_DATA' ;
+type ActionTypes = 'DATA_FETCH_SUCCESS'| 'DATA_FETCH-ERROR' ;
 export interface Action {
     type: ActionTypes;
     payload?: any;
