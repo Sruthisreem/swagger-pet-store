@@ -19,6 +19,7 @@ const initialState: State = {
     paths: {},
   },
   errorMessage: "",
+  selectedRow: "",
 };
 // Create Our context
 const globalContext = createContext<{

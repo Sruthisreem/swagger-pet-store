@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
-import { TableContentType, CustomizedState } from "../interface/interfaces";
+import { TableContentType } from "../interface/interfaces";
 import Table from "../components/table-view";
 
 const Details = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const pathState = location.state as CustomizedState;
   const { state } = useGlobalContext();
+
   const parameterHeader: string[] = ["Name", "Description", "Required"];
   const responseHeader: string[] = ["Code", "Description"];
+
   const formatPathData = () => {
-    let parentObj = state.swaggerData.paths[pathState.pathId];
+    let parentObj = state.swaggerData.paths[state.selectedRow];
     return Object.keys(parentObj || {}).reduce((acc: any, cur: any) => {
       acc[cur] = { ...(acc[cur] || {}) };
       acc[cur]["parameters"] = parentObj[cur]["parameters"];
@@ -23,6 +22,7 @@ const Details = () => {
       return acc;
     }, {});
   };
+
   const operations: string[] = Object.keys(formatPathData());
   const [parameterContent, setParamContent] = useState<TableContentType[]>([]);
   const [responseContent, setResponseContent] = useState<TableContentType[]>(
@@ -34,6 +34,7 @@ const Details = () => {
   useEffect(() => {
     handleInitialData();
   }, []);
+
   const handleInitialData = () => {
     if (selectedPathDetails && Object.keys(selectedPathDetails).length) {
       handleSelectedOperationDetails(operation, selectedPathDetails);
@@ -41,6 +42,7 @@ const Details = () => {
       navigate("/");
     }
   };
+
   const handleSelectedOperationDetails = (
     selectedOperation: string,
     formattedData: any
@@ -55,6 +57,7 @@ const Details = () => {
         required: itemData.required ? "true" : "false",
       });
     });
+
     let responseTableContent = Object.keys(selectedItem.responses).reduce(
       (res: any, el: any) => {
         if (
@@ -70,8 +73,12 @@ const Details = () => {
       },
       []
     );
+
     setParamContent(paramTableContent);
     setResponseContent(responseTableContent);
+    const rowId = state.selectedRow.split("/")[1];
+
+    navigate(`/${rowId}/${selectedItem.operationId}`);
   };
 
   const renderOperationDetails = (
@@ -82,6 +89,7 @@ const Details = () => {
     setCurrentOperations(selectedOperation);
     handleSelectedOperationDetails(selectedOperation, selectedPathDetails);
   };
+
   return (
     <div className="flex flex-col  h-screen bg-gray-100">
       <div className="bg-teal-600">
@@ -113,7 +121,7 @@ const Details = () => {
                 </div>
               </span>
               <p className="ml-3 font-medium text-white truncate">
-                <span className=" md:inline"> {pathState.pathId}</span>
+                <span className=" md:inline"> {state.selectedRow}</span>
               </p>
             </div>
           </div>
@@ -128,7 +136,8 @@ const Details = () => {
                 key={index}
                 className={`${
                   item === operation ? "bg-teal-500" : ""
-                } w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 font-bold py-2 px-4 border bg-white border-teal-500 rounded`}
+                } w-1/3 flex-1 mr-4 hover:bg-teal-500 text-pink-500 flex justify-center items-center 
+                font-bold py-2 px-4 border bg-white border-teal-500 rounded`}
                 onClick={(e) => renderOperationDetails(e, item)}
               >
                 {item}
@@ -137,7 +146,11 @@ const Details = () => {
           </div>
         </div>
         <div className="flex flex-col border rounded-lg border-gray-400 px-3 py-3 my-2">
-          <div className="text-xl  font-bold py-3">{selectedPathDetails && Object.keys(selectedPathDetails).length ? selectedPathDetails[operation].summary:''}</div>
+          <div className="text-xl  font-bold py-3">
+            {selectedPathDetails && Object.keys(selectedPathDetails).length
+              ? selectedPathDetails[operation].summary
+              : ""}
+          </div>
 
           <div className="text-xl  font-bold py-6">Parameters</div>
           <Table

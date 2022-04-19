@@ -7,7 +7,11 @@ const reducer: ReducerType = (state, action) => {
         isLoading: false,
         swaggerData: action.payload,
       };
-
+    case "SET_SELECTED_ROW":
+      return {
+        ...state,
+        selectedRow: action.payload,
+      };
     case "DATA_FETCH-ERROR":
       return {
         ...state,

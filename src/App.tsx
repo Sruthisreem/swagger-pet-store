@@ -11,7 +11,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="details/*" element={<Details />} />
+            <Route path="/:id/:pathId" element={<Details />} />
+            <Route path="/:id" element={<Details />} />
           </Routes>
         </Router>
       </GlobalContextProvider>

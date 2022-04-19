@@ -2,6 +2,7 @@ export interface State {
   isLoading: boolean;
   swaggerData: SwaggerData;
   errorMessage: string;
+  selectedRow: string;
 }
 interface SwaggerData {
   info: Info;
@@ -24,8 +25,8 @@ export interface EndpointMethods {
 export interface EndpointDetails {
   parameters: RequestParam[];
   responses: ResponseParam;
-  operationId: string
-  summary:string
+  operationId: string;
+  summary: string;
 }
 interface ResponseParam {
   [key: string]: {
@@ -42,7 +43,10 @@ export interface Tag {
   description: string;
 }
 
-type ActionTypes = "DATA_FETCH_SUCCESS" | "DATA_FETCH-ERROR";
+type ActionTypes =
+  | "DATA_FETCH_SUCCESS"
+  | "DATA_FETCH-ERROR"
+  | "SET_SELECTED_ROW";
 export interface Action {
   type: ActionTypes;
   payload?: any;
@@ -59,7 +63,4 @@ export interface TableContentType {
   name?: string;
   required?: string;
   code?: string;
-}
-export interface CustomizedState {
-  pathId: string;
 }
