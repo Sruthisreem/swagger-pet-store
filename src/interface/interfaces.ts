@@ -24,6 +24,8 @@ export interface EndpointMethods {
 export interface EndpointDetails {
   parameters: RequestParam[];
   responses: ResponseParam;
+  operationId: string
+  summary:string
 }
 interface ResponseParam {
   [key: string]: {

@@ -18,6 +18,8 @@ const Details = () => {
       acc[cur] = { ...(acc[cur] || {}) };
       acc[cur]["parameters"] = parentObj[cur]["parameters"];
       acc[cur]["responses"] = parentObj[cur]["responses"];
+      acc[cur]["operationId"] = parentObj[cur]["operationId"];
+      acc[cur]["summary"] = parentObj[cur]["summary"];
       return acc;
     }, {});
   };
@@ -135,12 +137,14 @@ const Details = () => {
           </div>
         </div>
         <div className="flex flex-col border rounded-lg border-gray-400 px-3 py-3 my-2">
-          <div className="text-xl text-pink-600 font-bold py-6">Parameters</div>
+          <div className="text-xl  font-bold py-3">{selectedPathDetails && Object.keys(selectedPathDetails).length ? selectedPathDetails[operation].summary:''}</div>
+
+          <div className="text-xl  font-bold py-6">Parameters</div>
           <Table
             tableHeaders={parameterHeader}
             tableContents={parameterContent}
           ></Table>
-          <div className="text-xl text-pink-600 font-bold py-6">Response</div>
+          <div className="text-xl font-bold py-6">Response</div>
           <Table
             tableHeaders={responseHeader}
             tableContents={responseContent}
